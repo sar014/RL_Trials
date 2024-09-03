@@ -1,0 +1,17 @@
+Episode will last until the car reaches end checkpoint?
+What to handle in OnEpisodeBegin():
+1.when the episode will end: on reaching last checkpoint, it should move back to its original location
+2.if the agent hits wall, it should move back to its original location
+
+
+What to include in CollectObservations()?
+-maybe pos of last checkpoint/target?
+-pos of the agent 
+-velocity of the agent (in x and z direction)
+Total = 8
+
+OnActionRecieved():
+1.Force along x axis
+2.Force along y axis
+3.Rewards
+4.Punishment

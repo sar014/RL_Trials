@@ -1,0 +1,3 @@
+5.0 works well for straight roads
+
+mlagents-learn config/CarAgent.yaml --initialize-from=Test5.0 --run-id=CurveRoad1.0
