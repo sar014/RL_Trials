@@ -48,13 +48,13 @@ public class Movement : MonoBehaviour
         // currentTurnAngle = maxTurnAngle * moveX;
 
         // Apply steering based on the horizontal input (moveX)
-        // float turnAngle = maxTurnAngle * moveX;
-        // frontLeft.steerAngle = turnAngle;
-        // frontRight.steerAngle = turnAngle;
+        float turnAngle = maxTurnAngle * moveZ;
+        frontLeft.steerAngle = turnAngle;
+        frontRight.steerAngle = turnAngle;
 
         // Apply motor torque based on forward/backward input (moveZ)
-        backLeft.motorTorque = moveZ * motorForce;
-        backRight.motorTorque = moveZ * motorForce;
+        backLeft.motorTorque = moveX * motorForce;
+        backRight.motorTorque = moveX * motorForce;
 
     }
 }
