@@ -58,6 +58,7 @@ public class CarAgent : Agent
         Rigidbody rb = GetComponent<Rigidbody>();
         sensor.AddObservation(rb.velocity.x);
         sensor.AddObservation(rb.velocity.z);
+
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -114,25 +115,41 @@ public class CarAgent : Agent
         float alignment = Vector3.Dot(transform.forward, directionToCheckpoint);
 
         // Reward the car for better alignment
-        SetReward(alignment);
+        // SetReward(0.5f);
 
         // Additional reward for successfully reaching the checkpoint
         if (Vector3.Distance(transform.position, checkpoints[nextCheckpointIndex].position) < 1.0f)
         {
-            SetReward(1.0f);
+            SetReward(2.0f);
             nextCheckpointIndex = (nextCheckpointIndex + 1) % checkpoints.Count;
         }
 
         // Penalize the car for moving backward
         if (forwardAmount < 0)
         {
-            SetReward(-0.1f);
+            SetReward(-1f);
         }
 
         // Penalize the car for not turning when it's needed
         if (alignment < 0.5f && turnAmount == 0f)
         {
-            SetReward(-0.1f);
+            SetReward(-1f);
+        }
+
+        // Penalty for low speed
+        float speed = GetComponent<Rigidbody>().velocity.magnitude;
+        if (speed < 1f)
+        {
+            SetReward(-0.2f); // Penalty for moving too slowly
+        }
+        else
+        {
+            SetReward(0.5f); // Small reward proportional to speed
+        }
+
+        if (Vector3.Distance(transform.position, checkpoints[nextCheckpointIndex].position) > 10f)
+        {
+            SetReward(-0.5f); // Penalize if the car takes too long to reach a checkpoint
         }
 
     }

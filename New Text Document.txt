@@ -1,8 +1,13 @@
 5.0 works well for straight roads
 Curve1.9 works well for curve and straight roads
+RoadExt1.4 works well for staright road and then left turn
+
 
 mlagents-learn config/CarAgent.yaml --initialize-from=Test5.0 --run-id=CurveRoad1.0
 
 mlagents-learn config.yaml --run-id=<your_run_id> --force
 
 mlagents-learn config.yaml --run-id=<your_run_id> --resume
+
+give more reward when reaching last checkpoint
+make changes to epsilon?
